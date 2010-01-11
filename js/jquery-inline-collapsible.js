@@ -7,29 +7,34 @@ function makeCollapsible(target, item, collapsible, triggerTarget, setInitStatus
 	var triggerAppend = ' )';
 	
 	$(target).find(item).each(function(i) {
+		$(this).find(collapsible).slideUp(1);
+		
 		var trigger = $(triggerLink)
 		$(this).find(triggerTarget).append(trigger);
 		trigger.before(triggerPrepend);
 		trigger.after(triggerAppend);
 		var item = this
-		var toggleCollapse = function(status)
+		var toggleCollapse = function(status, speed)
 		{
 			if (status == null) {
 				status = !item.collapseStatus;
 			}
+			if (speed == null) {
+			    speed = 1;
+			}
 			item.collapseStatus = status;
 			if (status) {
 				trigger.html(triggerCollapse);
-				$(item).find(collapsible).slideDown("normal");
+				$(item).find(collapsible).slideDown(speed);
 			} else {
 				trigger.html(triggerExpand);
-				$(item).find(collapsible).slideUp("normal");
+				$(item).find(collapsible).slideUp(speed);
 			}
 		}
 
 		trigger.click(function(event) {
 			event.preventDefault();
-			toggleCollapse()
+			toggleCollapse(null, 'normal')
 		})
 
 		// Collapse by default unless there are errors
