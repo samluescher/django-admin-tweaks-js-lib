@@ -21,7 +21,7 @@ jQuery(function($) {
 			$(this)[0].readOnly = true;
 		});
 		$(this).find('input, select, textarea').change(function() {
-			$(this).closest(item).find('input[id$=position]').val('X');
+			$(this).closest(item).find('input[id$='+positionField+']').val('X'); // mark for renumberAll() to fill in
 			renumberAll($('div.inline-group'));
 		});
 	});
